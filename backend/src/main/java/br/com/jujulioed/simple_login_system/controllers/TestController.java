@@ -1,20 +1,26 @@
 package br.com.jujulioed.simple_login_system.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class TestController {
 
     @GetMapping("test")
-    public String TestGet() {
-        return "Testing Get API";
+    public ResponseEntity<Map<String, String>> TestGet() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Testing Get API");
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("test")
-    public String TestPost(@RequestBody String body) {
-        return "Testing Post API with body message: " + body;
+    public ResponseEntity<Map<String, String>> TestPost(@RequestBody String body) {
+        Map<String, String> response = new HashMap<>();
+        response.put("bodySent", body);
+        return ResponseEntity.ok(response);
     }
 }
